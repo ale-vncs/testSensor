@@ -25,6 +25,7 @@
     socket.on('info', addMessages);
 
     function addMessages(message){
+        $('h3').text("Quantidade: " + message.length);
         for (let i = 0; i < message.sensorData.length; i++){
             $('.list').append(
                 "<div class='list-card'>" +
@@ -38,7 +39,6 @@
 
     function getMessages(){
         $.get(window.location.href + 'data', (data) => {
-            $('h3').text("Quantidade: " + data.length);
             data.forEach(addMessages);
         })
     }

@@ -17,6 +17,7 @@
 </div>
 <script>
     let socket = io();
+    let size = 0;
 
     $(() => {
         getMessages();
@@ -25,7 +26,8 @@
     socket.on('info', addMessages);
 
     function addMessages(message){
-        $('h3').text("Quantidade: " + message.length);
+        console.log("atualizando...");
+        $('h3').text("Quantidade: " + ++size);
         for (let i = 0; i < message.sensorData.length; i++){
             $('.list').append(
                 "<div class='list-card'>" +

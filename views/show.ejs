@@ -16,19 +16,18 @@
 				<td>sensorId</td>
 				<td>type</td>
 				<td>value</td>
-				<td>datetime</td>
+				<!--<td>datetime</td>-->
 			</tr>
 			</thead>
 			<tbody>
-			<% data.forEach(function(details) { %>
+			<% data.forEach(function(details) { for(let i = 0; i < details.sensorData.length; i++){%>
 				<tr>
 					<!--<td><%= details.id %></td>-->
 					<td><%= details.sensorId %></td>
-					<td><%= details.sensorType[0].type %></td>
-					<td><%= details.sensorType[0].value %></td>
-					<td><%= details.sensorType[0].date %></td>
+					<td><%= details.sensorData[i].type %></td>
+					<td><%= details.sensorData[i].value %></td>
 				</tr>
-			<% }) %>
+			<% }}) %>
 			</tbody>
 		</table>
 	</div>

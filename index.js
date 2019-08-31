@@ -1,38 +1,39 @@
 const express = require('express');
-const bodyParser = require('body-parser');
 const MongoClient = require('mongodb').MongoClient;
 
 const app = express();
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
 const uri = "mongodb+srv://Nugou:253726867@clustertest-kpogq.mongodb.net/test?retryWrites=true&w=majority";
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 let db = null;
-app.use(bodyParser.json());
+
+io.on('connection', (socket) => {
+    console.log('socket on');
+    socket.on('chat', function(msg){
+        io.emit('chat message', msg);
+    });
+});
+
+
+app.use(express.json());
 
 app.use(express.static(__dirname ));
-//app.set('view engine','ejs');
-//app.set('views', __dirname + '/views');
 
 client.connect(err => {
     db = client.db("sensor");
     // perform actions on the collection object
-    app.listen(process.env.PORT || port, function () {
+    server.listen(port, function () {
         console.log('Server executando na porta ' + this.address().port);
     });
 
     //client.close();
 });
 
-io.on('connection', () => {
-    console.log('socket on');
-});
-
 app.get('/', (req, res) => {
-    //res.render('show.ejs', { data: results });
-    //res.render('show.ejs');
+    res.sendFile(__dirname + '/index.html');
 });
 
 app.get('/data', (req, res) => {

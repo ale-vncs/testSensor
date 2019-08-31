@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Data view</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
     <link rel="stylesheet" href="/public/css/style.css">
 </head>
@@ -19,15 +19,15 @@
     let socket = io();
     let size = 0;
 
-    $(() => {
+    $(function () {
+        socket.on('info', addMessages);
         getMessages();
     });
 
-    socket.on('info', addMessages);
 
-    function addMessages(message){
+    async function addMessages(message){
         console.log("atualizando...");
-        $('h3').text("Quantidade: " + ++size);
+        document.getElementsByTagName('h3').item(0).innerText = "Quantidade: " + (++size);
         for (let i = 0; i < message.sensorData.length; i++){
             $('.list').append(
                 "<div class='list-card'>" +
@@ -39,14 +39,10 @@
         }
     }
 
-    function getMessages(){
+    async function getMessages(){
         $.get(window.location.href + 'data', (data) => {
             data.forEach(addMessages);
         })
-    }
-
-    function sendMessage(message){
-        $.post('http://localhost:3000/messages', message)
     }
 </script>
 </body>

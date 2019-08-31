@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Data view</title>
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+	<div class="main">
+		<h2>Registros</h2>
+		<table>
+			<thead>
+			<tr>
+				<!--<td>id</td>-->
+				<td>sensorId</td>
+				<td>type</td>
+				<td>value</td>
+				<td>datetime</td>
+			</tr>
+			</thead>
+			<tbody>
+			<% data.forEach(function(details) { %>
+				<tr>
+					<!--<td><%= details.id %></td>-->
+					<td><%= details.sensorId %></td>
+					<td><%= details.sensorType[0].type %></td>
+					<td><%= details.sensorType[0].value %></td>
+					<td><%= details.sensorType[0].date %></td>
+				</tr>
+			<% }) %>
+			</tbody>
+		</table>
+	</div>
+		<!--<button><a href="/">Voltar</a></button>-->
+</body>
+</html>

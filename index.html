@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Data view</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
+    <link rel="stylesheet" href="/public/css/style.css">
+</head>
+<body>
+<div class="main">
+    <h2>Registros</h2>
+    <h3>Quantidade: ...</h3>
+    <div class="list">
+
+    </div>
+</div>
+<script>
+    let socket = io();
+
+    $(() => {
+        getMessages();
+    });
+
+    socket.on('info', addMessages);
+
+    function addMessages(message){
+        for (let i = 0; i < message.sensorData.length; i++){
+            $('.list').append(
+                "<div class='list-card'>" +
+                "<h4>" + message.sensorId + "</h4>" +
+                "<p>" + message.sensorData[i].type + "</p>" +
+                "<p>" + message.sensorData[i].value + "</p>" +
+                "</div>"
+            )
+        }
+    }
+
+    function getMessages(){
+        $.get('http://localhost:3000/data', (data) => {
+            $('h3').text("Quantidade: " + data.length);
+            data.forEach(addMessages);
+        })
+    }
+
+    function sendMessage(message){
+        $.post('http://localhost:3000/messages', message)
+    }
+</script>
+</body>
+</html>

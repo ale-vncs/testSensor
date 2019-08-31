@@ -21,7 +21,7 @@ body{
     overflow-y: auto;
 }
 
-.main h2{
+.main h2, .main h3{
     width: 100%;
     padding: 15px 0;
     margin: 10px 0;
@@ -29,27 +29,21 @@ body{
     text-align: center;
 }
 
-.main table{
+.list{
     width: 100%;
     height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
-.main thead{
-    position: sticky;
-    top: 0;
-}
 
-.main thead td{
+.list-card{
+    grid-row: 1;
     background: rgba(0,0,0,0.4);
-    padding: 5px 8px;
+    padding: 8px;
     margin: 5px;
     text-align: center;
     font-size: 20px;
-}
-
-.main tbody td{
-    background: rgba(0,0,0,0.25);
-    padding: 5px 8px;
-    margin: 5px;
-    text-align: center;
 }

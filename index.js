@@ -4,7 +4,7 @@ const MongoClient = require('mongodb').MongoClient;
 
 const app = express();
 const uri = "mongodb+srv://Nugou:253726867@clustertest-kpogq.mongodb.net/test?retryWrites=true&w=majority";
-const port = 3000;
+const port = 8080;
 
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 let db = null;

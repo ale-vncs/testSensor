@@ -37,7 +37,7 @@
     }
 
     function getMessages(){
-        $.get('http://localhost:3000/data', (data) => {
+        $.get(window.location.href + 'data', (data) => {
             $('h3').text("Quantidade: " + data.length);
             data.forEach(addMessages);
         })

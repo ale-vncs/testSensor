@@ -11,7 +11,7 @@ let db = null;
 client.connect(err => {
     db = client.db("sensor");
     // perform actions on the collection object
-    app.listen(port, function () {
+    app.listen(process.env.PORT || 3000, function () {
         console.log('Server executando na porta ' + port);
     });
 
